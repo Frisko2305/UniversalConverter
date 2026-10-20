@@ -1,5 +1,10 @@
 ## 🔄 Universal Format Converter
 
+![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows)
+![License](https://img.shields.io/badge/License-MIT-green)
+[![Release](https://img.shields.io/github/v/release/frisko2305/UniversalConverter)](https://github.com/frisko2305/UniversalConverter/releases)
+
 Universal Format Converter is a fast, desktop-native utility that seamlessly bridges the gap between complex images (HEIC, DNG, ICO) and structured documents (Word, PDF, Markdown). Built with a highly responsive, identically mapped UI, it allows you to cross-convert files or batch-process entire directories into compressed .zip archives with zero friction.
 
 The clean, color-coded launch menu to select your input format.
