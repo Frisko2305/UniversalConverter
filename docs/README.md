@@ -1,5 +1,6 @@
 ## 🔄 Universal Format Converter
 
+![C#](https://img.shields.io/badge/C%23-239120?logo=csharp&logoColor=white)
 ![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
 ![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows)
 ![License](https://img.shields.io/badge/License-MIT-green)
