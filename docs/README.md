@@ -80,6 +80,7 @@ Open PowerShell or your preferred terminal:
 ```bash
 git clone https://github.com/frisko2305/UniversalConverter.git
 cd UniversalConverter
+dotnet build
 dotnet run
 ```
 Developed by Frisko2305.
