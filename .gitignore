@@ -399,3 +399,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Converter test files & heavy RAW media
+test_files/
+converted_outputs/
+*.dng
+*.DNG
+*.heic
+*.HEIC
