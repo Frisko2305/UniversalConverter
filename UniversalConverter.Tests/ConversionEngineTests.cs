@@ -3,6 +3,8 @@ using System.IO;
 using System.IO.Compression;
 using Xunit;
 using UniversalConverter;
+using PdfSharp;
+using ImageMagick;
 
 namespace UniversalConverter.Tests;
 
@@ -84,6 +86,48 @@ public class ConversionEngineTests
         finally
         {
             // Cleanup
+            if (File.Exists(file1)) File.Delete(file1);
+            if (File.Exists(file2)) File.Delete(file2);
+        }
+    }
+
+    [Fact]
+    public void ConvertFilesToZip_ImageToPdf_StoresNonEmptyPdfEntries()
+    {
+        PdfSharpLicense.SetAgplLicense();
+        string file1 = Path.Combine(Path.GetTempPath(), "test1.png");
+        string file2 = Path.Combine(Path.GetTempPath(), "test2.png");
+        using (var image = new MagickImage(MagickColors.Red, 1, 1))
+        {
+            image.Format = MagickFormat.Png;
+            image.Write(file1);
+            image.Write(file2);
+        }
+
+        try
+        {
+            byte[] zipBytes = ConversionEngine.ConvertFilesToZip(
+                new[] { file1, file2 },
+                FileFormat.PNG,
+                FileFormat.PDF);
+
+            using var ms = new MemoryStream(zipBytes);
+            using var archive = new ZipArchive(ms, ZipArchiveMode.Read);
+
+            Assert.Equal(2, archive.Entries.Count);
+            foreach (ZipArchiveEntry entry in archive.Entries)
+            {
+                using var entryStream = entry.Open();
+                using var pdfStream = new MemoryStream();
+                entryStream.CopyTo(pdfStream);
+                byte[] pdfBytes = pdfStream.ToArray();
+
+                Assert.True(pdfBytes.Length > 0, $"PDF entry {entry.FullName} is empty.");
+                Assert.Equal("%PDF-", System.Text.Encoding.ASCII.GetString(pdfBytes, 0, 5));
+            }
+        }
+        finally
+        {
             if (File.Exists(file1)) File.Delete(file1);
             if (File.Exists(file2)) File.Delete(file2);
         }

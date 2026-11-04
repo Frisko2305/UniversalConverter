@@ -217,6 +217,7 @@ public static class ConversionEngine
 
         using var gfx = XGraphics.FromPdfPage(page);
         gfx.DrawImage(xImage, 0, 0, page.Width.Point, page.Height.Point);
+        gfx.Dispose();
 
         using var outStream = new MemoryStream();
         document.Save(outStream, false);
